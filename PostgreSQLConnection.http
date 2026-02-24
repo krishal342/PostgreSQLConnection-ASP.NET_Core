@@ -1,6 +1,32 @@
-@PostgreSQLConnection_HostAddress = http://localhost:5167
+@PostgreSQLConnection_HostAddress = https://localhost:7234
 
-GET {{PostgreSQLConnection_HostAddress}}/weatherforecast/
-Accept: application/json
+
+###
+
+POST {{PostgreSQLConnection_HostAddress}}/students
+Content-Type: application/json
+
+{
+  "name":"John Doe",
+  "email":"john@gmail.com"
+}
+
+###
+
+@id=1
+GET {{PostgreSQLConnection_HostAddress}}/students/{{id}}
+
+###
+
+GET {{PostgreSQLConnection_HostAddress}}/students
+
+###
+
+PUT {{PostgreSQLConnection_HostAddress}}/students/{{id}}
+Content-Type: application/json
+
+{
+  "email":"JohnDoe@gmail.com"
+}
 
 ###
