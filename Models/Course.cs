@@ -9,8 +9,8 @@
 
         public int CreditHours { get; set; }
 
-        public List<Student> Students { get; set;  } = new ();
-
+        // navigation property
+        public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
 
     }
 }
