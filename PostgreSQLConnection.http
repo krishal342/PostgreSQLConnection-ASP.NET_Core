@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
   "name":"John Doe",
-  "email":"john@gmail.com"
+  "email":"JOHN@gmail.com"
 }
 
 ###
@@ -27,6 +27,35 @@ Content-Type: application/json
 
 {
   "email":"JohnDoe@gmail.com"
+}
+
+###
+///////////courses
+@courseId = 1
+
+POST {{PostgreSQLConnection_HostAddress}}/courses
+Content-Type: application/json
+
+{
+  "title": "Introduction to Programming",
+  "creditHours": 3
+}
+
+###
+
+GET {{PostgreSQLConnection_HostAddress}}/courses
+
+###
+
+GET {{PostgreSQLConnection_HostAddress}}/courses/{{courseId}}
+
+###
+
+PUT {{PostgreSQLConnection_HostAddress}}/courses/{{courseId}}
+Content-Type: application/json
+
+{
+  "description" : "This course provides an introduction to programming concepts and techniques."
 }
 
 ###

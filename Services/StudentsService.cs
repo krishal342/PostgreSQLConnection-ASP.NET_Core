@@ -31,7 +31,7 @@ namespace PostgreSQLConnection.Services
             await _context.Students.FindAsync(id);
 
         // update
-        public async Task<Student?> UpdateStudentAsync(int id, UpdateStudentDto updatedStudent)
+        public async Task<Student?> UpdateStudentAsync(int id, UpdateStudentDto studentDto)
         {
             var student = await _context.Students.FindAsync(id);
             if ( student is null)
@@ -39,8 +39,8 @@ namespace PostgreSQLConnection.Services
                 return null;
             }
             
-            student.Name = updatedStudent.Name ?? student.Name;
-            student.Email = updatedStudent.Email?.ToLower() ?? student.Email;
+            student.Name = studentDto.Name ?? student.Name;
+            student.Email = studentDto.Email?.ToLower() ?? student.Email;
 
             await _context.SaveChangesAsync();
             return student;
