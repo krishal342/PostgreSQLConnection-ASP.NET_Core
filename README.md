@@ -1,5 +1,5 @@
 
-This project demonstrates how to build a CRUD-based academic management system using ASP.NET Core with PostgreSQL as the database. It leverages Entity Framework Core for ORM functionality, along with Microsoft.EntityFrameworkCore.Design and Npgsql.EntityFrameworkCore.PostgreSQL packages for database integration. The system models Students, Courses, and Enrollments, showcasing how to design and manage relationships between entities in a real-world academic context.
+This project demonstrates how to build a CRUD-based academic management system using ASP.NET Core with PostgreSQL as the database. It leverages Entity Framework Core for ORM functionality, along with Microsoft Entity FrameworkCore Design and Npgsql EntityFrameworkCore PostgreSQL packages for database integration. The system models Students, Courses, and Enrollments, showcasing how to design and manage relationships between entities in a real-world academic context implementing concept of soft delete (by adding isPassedOut flag in student record) and hard delete.
 
 
 # Students route
@@ -29,3 +29,4 @@ This project demonstrates how to build a CRUD-based academic management system u
 - dotnet ef migrations add message
 
 - dotnet ef database update
+
