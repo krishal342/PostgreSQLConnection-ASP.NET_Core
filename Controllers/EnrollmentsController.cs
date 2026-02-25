@@ -53,13 +53,23 @@ namespace PostgreSQLConnection.Controllers
 
 
         // delete enrollment
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEnrollment(int id)
+        {
+            var result = await _enrollmentsService.DeleteEnrollmentAsync(id);
+            if (result is null)
+            {
+                return NotFound();
+            }
+            return NoContent();
+        }
 
-    //    var student = await _context.Students
-    //.Include(s => s.Enrollments)
-    //.ThenInclude(e => e.Course)
-    //.FirstOrDefaultAsync(s => s.Id == id);
+        //    var student = await _context.Students
+        //.Include(s => s.Enrollments)
+        //.ThenInclude(e => e.Course)
+        //.FirstOrDefaultAsync(s => s.Id == id);
 
-    //    var courses = student.Enrollments.Select(e => e.Course).ToList();
+        //    var courses = student.Enrollments.Select(e => e.Course).ToList();
 
     }
 }

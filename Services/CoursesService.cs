@@ -23,11 +23,15 @@ namespace PostgreSQLConnection.Services
 
         // read
         public async Task<List<Course>> GetCoursesAsync() =>
-            await _context.Courses.ToListAsync();
+            await _context.Courses
+            .Include(c => c.Enrollments)
+            .ToListAsync();
 
         // read by id
         public async Task<Course?> GetCourseAsync(int id) =>
-            await _context.Courses.FindAsync(id);
+            await _context.Courses
+            .Include(c => c.Enrollments)
+            .FirstOrDefaultAsync(c => c.Id == id);
 
         // update
         public async Task<Course?> UpdateCourseAsync(int id , UpdateCourseDto courseDto )
@@ -45,6 +49,5 @@ namespace PostgreSQLConnection.Services
             return course;
         }
 
-        // delete
     }
 }

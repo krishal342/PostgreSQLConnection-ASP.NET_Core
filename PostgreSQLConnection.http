@@ -20,6 +20,11 @@ GET {{PostgreSQLConnection_HostAddress}}/students/{{id}}
 
 GET {{PostgreSQLConnection_HostAddress}}/students
 
+
+###
+
+GET {{PostgreSQLConnection_HostAddress}}/students/passed-out
+
 ###
 
 PUT {{PostgreSQLConnection_HostAddress}}/students/{{id}}
@@ -28,6 +33,11 @@ Content-Type: application/json
 {
   "email":"JohnDoe@gmail.com"
 }
+
+###
+
+DELETE {{PostgreSQLConnection_HostAddress}}/students/{{id}}/soft-delete
+
 
 ###
 ///////////courses
@@ -62,21 +72,28 @@ Content-Type: application/json
 
 
 ///////////// enrollment
+@eid = 1
 
 POST {{PostgreSQLConnection_HostAddress}}/enrollments
 Content-Type: application/json
 
 {
-  "studentId": 1,
+  "studentId": 2,
   "courseId": 1
 }
 
 ###
 
-GET {{PostgreSQLConnection_HostAddress}}/enrollments/{{id}}
+GET {{PostgreSQLConnection_HostAddress}}/enrollments/{{eid}}
 
 ###
 
 GET {{PostgreSQLConnection_HostAddress}}/enrollments
+
+###
+
+
+
+DELETE {{PostgreSQLConnection_HostAddress}}/enrollments/{{eid}}
 
 ###

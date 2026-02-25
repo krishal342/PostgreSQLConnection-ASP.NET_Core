@@ -37,6 +37,13 @@ namespace PostgreSQLConnection.Controllers
             return Ok(student);
         }
 
+        [HttpGet("passed-out")]
+        public async Task<IActionResult> GetPassedOutStudents()
+        {
+            var students = await _studentsService.ReadPassedOutStudentsAsync();
+            return Ok(students);
+        }
+
         // create new student
         [HttpPost]
         public async Task<IActionResult> CreateStudent(Student student)
@@ -51,7 +58,7 @@ namespace PostgreSQLConnection.Controllers
         public async Task<IActionResult> UpdateStudent(int id, UpdateStudentDto updatedStudent)
         {
             var student = await _studentsService.UpdateStudentAsync(id, updatedStudent);
-            if(student is null)
+            if (student is null)
             {
                 return NotFound();
             }
@@ -59,6 +66,18 @@ namespace PostgreSQLConnection.Controllers
         }
 
         // delete student
+        [HttpDelete("{id}/soft-delete")]
+        public async Task<IActionResult> MarkAsPassedOut(int id)
+        {
+            var result = await _studentsService.MarkAsPassedOutAsync(id);
+            if (result is null)
+            {
+                return NotFound();
+            }
 
+
+            return NoContent();
+
+        }
     }
 }

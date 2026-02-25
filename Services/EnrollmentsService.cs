@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PostgreSQLConnection.Data;
+using PostgreSQLConnection.Dtos.CourseDto;
+using PostgreSQLConnection.Dtos.EnrollmentDto;
+using PostgreSQLConnection.Dtos.StudentDto;
 using PostgreSQLConnection.Models;
 
 namespace PostgreSQLConnection.Services
@@ -21,12 +24,58 @@ namespace PostgreSQLConnection.Services
         }
 
         // read all 
-        public async Task<List<Enrollment>> GetEnrollmentsAsync() =>
-            await _context.Enrollments.ToListAsync();
+        public async Task<List<ResponseEnrollmentDto>> GetEnrollmentsAsync() =>
+             await _context.Enrollments
+            .Include(e => e.Student)
+            .Include(e => e.Course)
+            .Select(e => new ResponseEnrollmentDto
+            {
+                Id = e.Id,
+                StudentId = e.StudentId,
+                CourseId = e.CourseId,
+                EnrollmentDate = e.EnrollmentDate,
+                Student = new StudentDtoForEnrollment
+                {
+                    Id = e.Student!.Id,
+                    Name = e.Student.Name,
+                    Email = e.Student.Email
+                },
+                Course = new CourseDtoForEnrollment 
+                {
+                    Id = e.Course!.Id,
+                    Title = e.Course.Title,
+                    Description = e.Course.Description,
+                    CreditHours = e.Course.CreditHours
+                }
+            })
+            .ToListAsync();
 
         // read by id
-        public async Task<Enrollment?> GetEnrollmentAsync(int id) =>
-            await _context.Enrollments.FindAsync(id);
+        public async Task<ResponseEnrollmentDto?> GetEnrollmentAsync(int id) =>
+            await _context.Enrollments
+            .Include(e => e.Student)
+            .Include(e => e.Course)
+                        .Select(e => new ResponseEnrollmentDto
+                        {
+                            Id = e.Id,
+                            StudentId = e.StudentId,
+                            CourseId = e.CourseId,
+                            EnrollmentDate = e.EnrollmentDate,
+                            Student = new StudentDtoForEnrollment
+                            {
+                                Id = e.Student!.Id,
+                                Name = e.Student.Name,
+                                Email = e.Student.Email
+                            },
+                            Course = new CourseDtoForEnrollment
+                            {
+                                Id = e.Course!.Id,
+                                Title = e.Course.Title,
+                                Description = e.Course.Description,
+                                CreditHours = e.Course.CreditHours
+                            }
+                        })
+            .FirstOrDefaultAsync(e => e.Id == id);
 
         // delete
         public async Task<bool?> DeleteEnrollmentAsync(int id)
