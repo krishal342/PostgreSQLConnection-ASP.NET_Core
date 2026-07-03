@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
 
@@ -38,12 +38,13 @@ jobs:
 
     # BUILD THE DOCKER IMAGE AND PUSH IT TO DOCKER HUB
     - name: Build and Push Docker Image
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         context: .
         file: ./Dockerfile
         push: true
         # Tags the image as 'latest' and with the unique GitHub commit SHA
         tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/my-api:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/my-api:${{ github.sha }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/PostgreSQLConnection:latest
+
+          #${{ secrets.DOCKERHUB_USERNAME }}/PostgreSQLConnection:${{ github.sha }}
