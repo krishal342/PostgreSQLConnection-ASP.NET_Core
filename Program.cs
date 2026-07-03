@@ -37,4 +37,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/", () => new
+{
+    Message = "This is \' / \' route.",
+    OtherRoute = "/students, /courses, /enrollments"
+});
+
 app.Run();

@@ -1,4 +1,4 @@
-@PostgreSQLConnection_HostAddress = https://localhost:7234
+@PostgreSQLConnection_HostAddress = http://localhost:5167
 
 
 ###
