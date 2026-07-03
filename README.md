@@ -57,6 +57,5 @@ Create a snapshot of your current entity models:
 ```bash
 dotnet ef migrations add initial_migration_setup
 
-```bash
 dotnet ef database update
 
